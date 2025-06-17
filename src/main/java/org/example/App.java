@@ -18,22 +18,24 @@ public class App {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        TaskService taskService = new TaskServiceImpl();
-        TaskController taskController = new TaskController(taskService);
-        boolean running = true;
-        while (running) {
-            printMenu();
-            String command = scanner.nextLine().trim();
-            switch (command) {
-                case "1" -> createTask(taskController);
-                case "2" -> listTasks(taskController);
-                case "3" -> deleteTask(taskController);
-                case "0" -> {
-                    running = false;
-                    System.out.println("Выход...");
-                }
-            }
-        }
+        Task task = new Task();
+
+//        TaskService taskService = new TaskServiceImpl();
+//        TaskController taskController = new TaskController(taskService);
+//        boolean running = true;
+//        while (running) {
+//            printMenu();
+//            String command = scanner.nextLine().trim();
+//            switch (command) {
+//                case "1" -> createTask(taskController);
+//                case "2" -> listTasks(taskController);
+//                case "3" -> deleteTask(taskController);
+//                case "0" -> {
+//                    running = false;
+//                    System.out.println("Выход...");
+//                }
+//            }
+//        }
     }
 
     private static void listTasks(TaskController taskController) {
