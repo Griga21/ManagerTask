@@ -22,7 +22,7 @@ public class TaskController {
 
     public String deleteById(Long id) {
         taskService.deleteById(id);
-        return "Задача создана с ID: " + id;
+        return "Задача удалена с ID: " + id;
     }
 
 

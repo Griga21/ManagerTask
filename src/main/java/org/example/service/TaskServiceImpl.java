@@ -7,8 +7,8 @@ import org.example.repository.InMemoryStorage;
 import java.util.List;
 
 public class TaskServiceImpl implements TaskService {
-    InMemoryStorage inMemoryStorage = new InMemoryStorage();
-    FileStorage fileStorage = new FileStorage();
+    private InMemoryStorage inMemoryStorage = new InMemoryStorage();
+    private FileStorage fileStorage = new FileStorage();
 
     @Override
     public String add(Task task) {

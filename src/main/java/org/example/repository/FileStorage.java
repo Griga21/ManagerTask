@@ -1,11 +1,13 @@
 package org.example.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.entity.Task;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,8 +23,8 @@ public class FileStorage implements Storage<Long, Task> {
         try {
             ObjectNode jsonNode = objectMapper.createObjectNode();
             for (Long i : fileStirageMap.keySet())
-                jsonNode.put("id:title", i + ":" + fileStirageMap.get(i).getTitle());
-            objectMapper.writeValue(new File("src/test/resources/employeeWithUnknownProperties.json"), jsonNode);
+                jsonNode.put("id:Task", i + ":" + fileStirageMap.get(i).toString());
+            objectMapper.writeValue(new File("src/main/resources/employeeWithUnknownProperties.json"), jsonNode);
         } catch (IOException e) {
             System.out.println("Ошибка сохранения файла " + e);
         }
@@ -35,8 +37,9 @@ public class FileStorage implements Storage<Long, Task> {
 
     @Override
     public Task getById(Long id) {
-        try {
-           objectMapper.readValue(new File(""), fileStirageMap);
+        try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/employeeWithUnknownProperties.json");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            Task task = (Task) objectInputStream.readObject();
         } catch (IOException e) {
             System.out.println("Ошибка сохранения файла " + e);
         } catch (ClassNotFoundException e) {
@@ -49,7 +52,7 @@ public class FileStorage implements Storage<Long, Task> {
     public List<Task> getAll() {
         List<Task> list = new LinkedList<>();
         for (Long id : fileStirageMap.keySet()) {
-            try (FileInputStream fileInputStream = new FileInputStream(fileStirageMap.get(id));
+            try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/employeeWithUnknownProperties.json");
                  ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
                 list.add((Task) objectInputStream.readObject());
             } catch (IOException e) {
