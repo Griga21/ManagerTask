@@ -71,4 +71,17 @@ public class Task {
     public void setStart(LocalTime start) {
         this.start = start;
     }
+
+    @Override
+    public String toString() {
+        return "Task [" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", status=" + status +
+                ", start=" + start +
+                ", duration=" + duration +
+                ']';
+    }
 }
